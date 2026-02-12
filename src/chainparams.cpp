@@ -1,5 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-present The Bitcoin Core developers
+// Copyright (c) 2026-present The Bitcoin Moola Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -62,7 +62,7 @@ void ReadRegTestArgs(const ArgsManager& args, CChainParams::RegTestOptions& opti
         if (const auto buried_deployment = GetBuriedDeployment(deployment_name)) {
             options.activation_heights[*buried_deployment] = *height;
         } else {
-            throw std::runtime_error(strprintf("Invalid name (%s) for -testactivationheight=name@height.", arg));
+            throw std::runtime_error(strprintf("Invalid name (%s) for -testactivationheight=name@height.", deployment_name));
         }
     }
 
@@ -85,9 +85,10 @@ void ReadRegTestArgs(const ArgsManager& args, CChainParams::RegTestOptions& opti
         if (vDeploymentParams.size() >= 4) {
             const auto min_activation_height{ToIntegral<int64_t>(vDeploymentParams[3])};
             if (!min_activation_height) {
-                throw std::runtime_error(strprintf("Invalid min_activation_height (%s)", vDeploymentParams[3]));
+                vbparams.min_activation_height = 0;
+            } else {
+                vbparams.min_activation_height = *min_activation_height;
             }
-            vbparams.min_activation_height = *min_activation_height;
         } else {
             vbparams.min_activation_height = 0;
         }
@@ -118,7 +119,7 @@ std::unique_ptr<const CChainParams> CreateChainParams(const ArgsManager& args, c
 {
     switch (chain) {
     case ChainType::MAIN:
-        return CChainParams::Main();
+        return CChainParams::Main(); // MAIN network is now Bitcoin Moola
     case ChainType::TESTNET:
         return CChainParams::TestNet();
     case ChainType::TESTNET4:
