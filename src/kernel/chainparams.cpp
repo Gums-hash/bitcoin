@@ -232,7 +232,7 @@ public:
         pchMessageStart[3] = 0x19;
 
         // Your chosen port
-        nDefaultPort = 29333; // If you want different from mainnet, change to 29334/29335, etc.
+        nDefaultPort = 29334; // If you want different from mainnet, change to 29334/29335, etc.
 
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 0;
@@ -244,7 +244,7 @@ public:
         const uint32_t nBits = 0x207fffff;
         const uint32_t nNonce = 2;
 
-        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // Never connect to Bitcoin seeds:
@@ -338,7 +338,7 @@ public:
         const uint32_t nBits = 0x207fffff;
         const uint32_t nNonce = 3;
 
-        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // Never connect to Bitcoin seeds:
@@ -446,7 +446,7 @@ public:
         const uint32_t nBits = 0x207fffff;
         const uint32_t nNonce = 4;
 
-        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 85);
@@ -549,7 +549,7 @@ public:
         const uint32_t nBits = 0x207fffff;
         const uint32_t nNonce = 5;
 
-        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // No seeds.
