@@ -144,7 +144,7 @@ public:
         const uint32_t nBits = 0x207fffff;        // easy
         const uint32_t nNonce = 1;
 
-        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(pszTimestamp, MoolaGenesisScript(), nTime, nNonce, nBits, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
 
         // Do NOT assert Bitcoin hashes. (Your chain is new.)
