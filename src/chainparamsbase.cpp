@@ -1,5 +1,5 @@
 // Copyright (c) 2010 Satoshi Nakamoto
-// Copyright (c) 2009-present The Bitcoin Core developers
+// Copyright (c) 2026-present The Bitcoin Moola Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -34,22 +34,38 @@ const CBaseChainParams& BaseParams()
 }
 
 /**
- * Port numbers for incoming Tor connections (8334, 18334, 38334, 48334, 18445) have
- * been chosen arbitrarily to keep ranges of used ports tight.
+ * IMPORTANT (Bitcoin Moola):
+ * - These are RPC ports (NOT P2P ports).
+ * - They must not reuse Bitcoin Core's defaults to avoid "clutching"/collisions.
+ *
+ * P2P ports you set elsewhere (examples from our earlier work):
+ *   - testnet3 P2P: 29333
+ *   - testnet4 P2P: 29444
+ *
+ * Here we set matching-but-distinct RPC ports.
  */
 std::unique_ptr<CBaseChainParams> CreateBaseChainParams(const ChainType chain)
 {
     switch (chain) {
     case ChainType::MAIN:
-        return std::make_unique<CBaseChainParams>("", 8332);
+        // Bitcoin Core default RPC is 8332; use a coin-specific RPC port instead.
+        return std::make_unique<CBaseChainParams>("", 29332);
+
     case ChainType::TESTNET:
-        return std::make_unique<CBaseChainParams>("testnet3", 18332);
+        // Bitcoin Core default testnet RPC is 18332; align near your 29333 P2P but keep distinct.
+        return std::make_unique<CBaseChainParams>("testnet3", 29334);
+
     case ChainType::TESTNET4:
-        return std::make_unique<CBaseChainParams>("testnet4", 48332);
+        // Bitcoin Core default testnet4 RPC is 48332; align near your 29444 P2P but keep distinct.
+        return std::make_unique<CBaseChainParams>("testnet4", 29443);
+
     case ChainType::SIGNET:
-        return std::make_unique<CBaseChainParams>("signet", 38332);
+        // Bitcoin Core default signet RPC is 38332; choose a non-Bitcoin port.
+        return std::make_unique<CBaseChainParams>("signet", 29383);
+
     case ChainType::REGTEST:
-        return std::make_unique<CBaseChainParams>("regtest", 18443);
+        // Bitcoin Core default regtest RPC is 18443; choose a non-Bitcoin port.
+        return std::make_unique<CBaseChainParams>("regtest", 29483);
     }
     assert(false);
 }
